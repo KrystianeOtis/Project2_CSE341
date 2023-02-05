@@ -1,0 +1,21 @@
+{
+    "book": {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "genre": "Literary Fiction",
+        "isbn": "9780446310789"
+    },
+    "book2": {
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "genre": "Literary Fiction",
+        "isbn": "9780743273565"
+    },
+    "book3": {
+        "title": "1984",
+        "author": "George Orwell",
+        "genre": "Dystopian Fiction",
+        "isbn": "9780451524935"
+    }
+}
+

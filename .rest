@@ -1,0 +1,32 @@
+// LOCALHOST
+###
+GET http://localhost:3000/api-docs HTTP/1.1
+
+###
+POST http://localhost:3000/books/ HTTP/1.1
+
+### Create contact
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+
+{
+    "title": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "genre": "Fantasy",
+    "isbn": "9780261102359"
+}
+
+
+    # {
+    #     "title": "Pride and Prejudice",
+    #     "author": "Jane Austen",
+    #     "genre": "Literary Fiction",
+    #     "isbn": "9780141197751"
+    # },
+
+    # {
+    #     "title": "The Hitchhiker's Guide to the Galaxy",
+    #     "author": "Douglas Adams",
+    #     "genre": "Science Fiction",
+    #     "isbn": "9780330509044"
+    # }
