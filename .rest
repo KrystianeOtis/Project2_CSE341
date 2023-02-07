@@ -3,7 +3,10 @@
 GET http://localhost:3000/api-docs HTTP/1.1
 
 ###
-POST http://localhost:3000/books/ HTTP/1.1
+GET http://localhost:3000/books/ HTTP/1.1
+
+###
+GET http://localhost:3000/books/63df48822bdf8f14ba93f2e7 HTTP/1.1
 
 ### Create contact
 POST http://localhost:3000/books HTTP/1.1
