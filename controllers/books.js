@@ -1,5 +1,6 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
+const validateBook = require('../helper');
 
 const getAll = async (req, res) => {
   try{
@@ -46,6 +47,11 @@ const getAddBook = async (req, res) => {
       genre: req.body.genre,
       isbn: req.body.isbn
     };
+    const { error } = validateBook(book);
+    if (error) {
+      res.status(400).json({ error: error.message });
+      return;
+    }
     const response = await mongodb.getDb().db('booksDB').collection('books').insertOne(book);
     if (response.acknowledged) {
       res.status(201).json(response);
@@ -67,6 +73,11 @@ const updateBook = async (req, res) => {
       genre: req.body.genre,
       isbn: req.body.isbn
     };
+    const { error } = validateBook(book);
+    if (error) {
+      res.status(400).json({ error: error.message });
+      return;
+    }
     const response = await mongodb
       .getDb()
       .db('booksDB')

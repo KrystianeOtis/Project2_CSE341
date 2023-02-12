@@ -22,8 +22,10 @@
   },
   "homepage": "https://github.com/nathanbirch/cse341-apiCourse-code#readme",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "dotenv": "^16.0.3",
     "express": "^4.17.3",
+    "joi": "^17.7.1",
     "mongodb": "^4.13.0",
     "swagger-ui-express": "^4.6.0"
   },
