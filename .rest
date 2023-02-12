@@ -6,30 +6,29 @@ GET http://localhost:3000/api-docs HTTP/1.1
 GET http://localhost:3000/books/ HTTP/1.1
 
 ###
-GET http://localhost:3000/books/63df48822bdf8f14ba93f2e7 HTTP/1.1
+GET http://localhost:3000/books/63e859e9bd16449396cca6ad HTTP/1.1
 
-### Create contact
+### Create book
 POST http://localhost:3000/books HTTP/1.1
 content-type: application/json
 
 {
-    "title": "The Lord of the Rings",
-    "author": "J.R.R. Tolkien",
+    "title": "A Song of Ice and Fire",
+    "author": "George R.R. Martin",
     "genre": "Fantasy",
-    "isbn": "9780261102359"
+    "isbn": "9780553573428"
 }
 
+### PUT book
+PUT http://localhost:3000/books/63e859e9bd16449396cca6ad HTTP/1.1
+content-type: application/json
 
-    # {
-    #     "title": "Pride and Prejudice",
-    #     "author": "Jane Austen",
-    #     "genre": "Literary Fiction",
-    #     "isbn": "9780141197751"
-    # },
+{
+    "title": "A Song of Ice and Water",
+    "author": "George R.R. Martin",
+    "genre": "Fantasy",
+    "isbn": "9780553573428"
+}
 
-    # {
-    #     "title": "The Hitchhiker's Guide to the Galaxy",
-    #     "author": "Douglas Adams",
-    #     "genre": "Science Fiction",
-    #     "isbn": "9780330509044"
-    # }
+### DELETE book
+DELETE http://localhost:3000/books/63e859e9bd16449396cca6ad HTTP/1.1
