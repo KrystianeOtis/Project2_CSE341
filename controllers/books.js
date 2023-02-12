@@ -84,13 +84,17 @@ const updateBook = async (req, res) => {
 };
 
 const deleteBook = async (req, res) => {
-  const bookId = new ObjectId(req.params.id);
-  const response = await mongodb.getDb().db('booksdb').collection('books').remove({ _id: bookId }, true);
-  console.log(response);
-  if (response.deletedCount > 0) {
-    res.status(204).send();
-  } else {
-    res.status(500).json(response.error || 'Some error occurred while deleting the book.');
+  try {
+    const bookId = new ObjectId(req.params.id);
+    const response = await mongodb.getDb().db('booksDB').collection('books').deleteOne({ _id: bookId });
+    if (response.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(404).json({ error: "The book with the given ID was not found." });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred while deleting the book." });
+    console.error(error);
   }
 };
 
