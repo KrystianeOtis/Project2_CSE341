@@ -47,17 +47,18 @@ const getAddBook = async (req, res) => {
       genre: req.body.genre,
       isbn: req.body.isbn
     };
-    const { error } = validateBook(book);
-    if (error) {
-      res.status(400).json({ error: error.message });
-      return;
-    }
-    const response = await mongodb.getDb().db('booksDB').collection('books').insertOne(book);
-    if (response.acknowledged) {
-      res.status(201).json(response);
-    } else {
-      res.status(500).json({ error: 'An error occurred while creating the book' });
-    }
+    const errors = validateBook.validateBook(book);
+      if (errors === undefined) {
+      const response = await mongodb.getDb().db('booksDB').collection('books').insertOne(book);
+      if (response.acknowledged) {
+        res.status(201).json(response);
+      } else {
+        res.status(500).json({ error: 'An error occurred while creating the book' });
+      }
+  }
+  else {
+    throw errors.details;
+  }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while creating the book' });
@@ -73,10 +74,14 @@ const updateBook = async (req, res) => {
       genre: req.body.genre,
       isbn: req.body.isbn
     };
-    const { error } = validateBook(book);
-    if (error) {
-      res.status(400).json({ error: error.message });
-      return;
+    const errors = validateBook.validateBook(book);
+    if (errors === undefined) {
+      const response = await mongodb.getDb().db('booksDB').collection('books').insertOne(book);
+      if (response.acknowledged) {
+        res.status(201).json(response);
+      } else {
+        res.status(500).json({ error: 'An error occurred while updating the book' });
+      }
     }
     const response = await mongodb
       .getDb()
@@ -86,11 +91,13 @@ const updateBook = async (req, res) => {
     console.log(response);
     if (response.modifiedCount > 0) {
       res.status(204).send();
-    } else {
-      throw new Error('Error occurred while updating the book.');
     }
+    else {
+      throw errors.details;
+  }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while creating the book' });
   }
 };
 
@@ -104,8 +111,8 @@ const deleteBook = async (req, res) => {
       res.status(404).json({ error: "The book with the given ID was not found." });
     }
   } catch (error) {
-    res.status(500).json({ error: "An error occurred while deleting the book." });
     console.error(error);
+    res.status(500).json({ error: 'An error occurred while deleting the book' });
   }
 };
 
